@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Main from './Contents/Main';
-// import Register from './Contents/Register';
-import { Route } from 'react-router-dom';
+import Register from './Contents/Register';
+import Login from './Contents/Login';
+import Board from './Contents/Board';
+import BoardWrite from './Contents/BoardWrite';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div>
         <Layout>
-        <Route exact path="/" component={Main} />
-        {/* <Route exact path="/login" component={Login} /> */}
-        {/* <Route path="/register" component={Register} /> */}
-        {/* <Route path="/board" component={Board} /> */}
+        <Router>
+            <Switch>
+              <Route exact path="/" component={Main}/>
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
+              <Route path="/board" component={Board} />
+              <Route path="/boardwrite" component={BoardWrite} />
+            </Switch>
+          </Router>
         </Layout>
       </div>
     );

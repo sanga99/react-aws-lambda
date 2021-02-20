@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Register from '../Contents/Register';
+import Login from '../Contents/Login';
+import Board from '../Contents/Board';
 
 class Header extends Component {
     render() {
       return (
         <div>
             {/* <Container> */}
-                {/* <Link to="/login">로그인</Link> */}
+                <Link to="/login">로그인</Link>
                 <Link to="/register">회원가입</Link>
-                {/* <Link to="/board">게시판</Link> */}
+                <Link to="/board">게시판</Link>
             {/* </Container> */}
-            <Route path="/register" component={Register} />
         </div>
       );
     }
