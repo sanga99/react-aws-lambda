@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../Layout/Header';
+import axios from 'axios';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 class Register  extends Component {
@@ -11,6 +13,7 @@ class Register  extends Component {
             name: '',
             email: '',
             phone: '',
+            regist_date: moment().format('YYYY-MM-DD HH:MM'),
         };
 
         handleChange = (e) => {
@@ -23,7 +26,7 @@ class Register  extends Component {
         handleOnSubmit = (e) => {
             e.preventDefault();
 
-            const { login_id, password, password2, name, email, phone } = this.state;
+            const { login_id, password, password2, name, email, phone, regist_date } = this.state;
 
             if(login_id == null || login_id == '' ){
                 alert('아이디를 입력해주세요');
@@ -42,51 +45,76 @@ class Register  extends Component {
                 return;
             } 
 
-            alert('성공')
+            axios.post('https://pmnn50rls9.execute-api.ap-northeast-2.amazonaws.com/proto/user/insert', this.state)
+            .then(({data})=>{
+                if(data.ResponseMetadata.HTTPStatusCode==200)
+                    alert('등록되었습니다.');
+                this.props.history.push('/');  
+            })
+            .catch(e => {
+                console.error(e);
+            })
         }
 
 
     render() {
       return (
         <div>
-            <Header/>
-            <h3>회원가입</h3>
-            <div/>
-            <form onSubmit={this.handleOnSubmit}>
-                <div>
+            <Wrap>
+                <h3>회원가입</h3>
+                <div/>
+                <form onSubmit={this.handleOnSubmit}>
                     <div>
-                        <span>ID</span>
-                        <input type="text" name="login_id" value={this.state.login_id} onChange={this.handleChange} placeholder="아이디 필수" />
+                        <div>
+                            <span>ID</span>
+                            <input type="text" name="login_id" value={this.state.login_id} onChange={this.handleChange} placeholder="아이디 필수" />
+                        </div>
+                        <div>
+                            <span>password</span>
+                            <input type="text" name="password" value={this.state.password} onChange={this.handleChange} placeholder="비밀번호 필수"/>
+                        </div>
+                        <div>
+                            <span>password2</span>
+                            <input type="text" name="password2" value={this.state.password2} onChange={this.handleChange} placeholder="비밀번호 재입력 필수" />
+                        </div>
+                        <div>
+                            <span>name</span>
+                            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
+                        </div>
+                        <div>
+                            <span>email</span>
+                            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
+                        </div>
+                        <div>
+                            <span>phone</span>
+                            <input type="text" name="phone" value={this.state.phone} onChange={this.handleChange} />
+                        </div>
                     </div>
-                    <div>
-                        <span>password</span>
-                        <input type="text" name="password" value={this.state.password} onChange={this.handleChange} placeholder="비밀번호 필수"/>
-                    </div>
-                    <div>
-                        <span>password2</span>
-                        <input type="text" name="password2" value={this.state.password2} onChange={this.handleChange} placeholder="비밀번호 재입력 필수" />
-                    </div>
-                    <div>
-                        <span>name</span>
-                        <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
-                    </div>
-                    <div>
-                        <span>email</span>
-                        <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
-                    </div>
-                    <div>
-                        <span>phone</span>
-                        <input type="text" name="phone" value={this.state.phone} onChange={this.handleChange} />
-                    </div>
-                </div>
-                <div>
-                    <button type="submit">회원가입</button>
-                </div>
-            </form>
+                    <Button>
+                        <Link to="/">취소</Link>
+                        <a href="#" onClick={this.handleOnSubmit}>회원가입</a>
+                    </Button>
+                </form>
+            </Wrap>
         </div>
       );
     }
   }
+
+const Wrap = styled.div`
+padding: 20px; 
+h2 { 
+     padding-bottom: 20px; 
+     border-bottom: 1px solid #ccc; 
+} 
+p { min-height: 200px; } 
+`; 
+const Button = styled.div` 
+    border-top: 1px solid #eee; 
+    padding: 20px; 
+    a { float: right; padding: 10px 20px; border-radius: 5px; text-decoration: none; background: #f2f2f2; border: 1px solid #ddd; color: #424242;
+    font-size: 16px; } a + a { margin-right: 5px; } 
+`;
   
 export default Register;
 
