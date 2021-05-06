@@ -4,7 +4,7 @@
 
 <br/>
 
-##### [사용기술]
+#### [사용기술]
 
 front : react.js
 backend : python
@@ -15,7 +15,7 @@ hosting : AWS S3
 
 <br/>
 
-##### [간단한 동작설명]
+#### [간단한 동작설명]
 
 client단(react)에서 axios를 이용하여 API를 서버단으로 보내다.
 여기서 request data를 받을 서버단은 AWS Lambda 모듈이다.
@@ -31,7 +31,7 @@ local에서 python 코드로 작성하여 해당되는 AWS lambda 함수에 laye
 
 <br/>
 
-##### [내용]
+#### [내용]
 
 로그인
 
@@ -43,7 +43,7 @@ local에서 python 코드로 작성하여 해당되는 AWS lambda 함수에 laye
 
 <br/>
 
-##### [기능정의]
+#### [기능정의]
 
 1. 메인
     - 헤더 : 로그인(로그아웃) / 회원가입(마이페이지) / 게시판
