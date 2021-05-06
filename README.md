@@ -1,6 +1,6 @@
 <br/>
 
-###  eact와 AWS lambda를 이용한 로그인, 회원가입, 게시판 예제
+###  React와 AWS lambda를 이용한 로그인, 회원가입, 게시판 예제
 
 <br/>
 
